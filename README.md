@@ -2,50 +2,94 @@
 
 ## Run Locally on Windows
 
-You need Node.js 22.13+ and a Firebase project with Google sign-in enabled.
+You need [Node.js 22.13 or newer](https://nodejs.org/) and an internet connection for Google sign-in. DigiVault saves its database and uploaded files on the computer running the app.
 
-1. Open PowerShell in the project folder and install dependencies:
-	```powershell
-	npm.cmd install
-	```
-   Check that installation worked:
-   ```powershell
-   node -v
-   npm.cmd ls --depth=0
-   Test-Path node_modules
+### If DigiVault has already been set up on this computer
+
+Open the DigiVault project folder in VS Code, open **Terminal → New Terminal**, and run:
+
+```powershell
+npm.cmd start
+```
+
+Then open **http://localhost:4000** in your browser. Keep the terminal open while you use the app. You do not need to create `.env`, install dependencies again, or run a separate database setup each time.
+
+### If this is a new computer or a fresh copy of the project
+
+Do these steps once on that computer.
+
+#### 1. Install the project dependencies
+
+Open the project folder in VS Code, choose **Terminal → New Terminal**, and run:
+
+```powershell
+npm.cmd install
+```
+
+Wait for it to finish. This downloads the packages the project needs. You do not need to repeat this every time you start the project.
+
+#### 2. Create your local `.env` file
+
+In the same terminal, run:
+
+```powershell
+Copy-Item .env.example .env
+notepad .env
+```
+
+`.env` is a private settings file in the main DigiVault folder. It is not included in GitHub, so each new computer needs its own copy. Keep this file on your computer and never upload or send it to anyone.
+
+#### 3. Create and download a Firebase service-account key
+
+The backend needs this key to check Google sign-ins. In the [Firebase Console](https://console.firebase.google.com/), select the **same Firebase project used by the web app**. The web app currently uses project ID `digivault-2026`.
+
+1. In Firebase, click the gear icon next to **Project Overview**, then choose **Project settings**.
+2. Open the **Service accounts** tab.
+3. In the **Firebase Admin SDK** section, click **Generate new private key**, then confirm.
+4. Your browser downloads a `.json` file, usually into your **Downloads** folder. Keep it private. Do not put it in the project folder, commit it to GitHub, or share it.
+5. Open that downloaded JSON file with Notepad. Find these three values in the file:
+   - `project_id` — copy only the value inside the quotes (for example, `digivault-2026`).
+   - `client_email` — copy only the email address inside the quotes.
+   - `private_key` — copy the entire value between its quotes, starting with `-----BEGIN PRIVATE KEY-----` and ending with `-----END PRIVATE KEY-----\n`. Copy the `\n` characters too. Do not copy the JSON property name, colon, or surrounding quotes.
+6. In the `.env` Notepad window, replace the example values on these lines:
+
+   ```dotenv
+   FIREBASE_PROJECT_ID=paste-project_id-here
+   FIREBASE_CLIENT_EMAIL=paste-client_email-here
+   FIREBASE_PRIVATE_KEY="paste-the-complete-private_key-value-here"
    ```
-   Node must be version 22.13 or newer. The last command should say `True`, and `npm.cmd ls --depth=0` should finish without `npm ERR!`.
 
-   If `npm.cmd install` is not recognized or fails in PowerShell, open **Command Prompt** in the project folder and run `npm install` there.
+   Keep the double quotes around the `FIREBASE_PRIVATE_KEY` value and keep it on one line. The downloaded JSON is only a source for these three values; do not paste the whole JSON file into `.env`.
 
-2. Create `.env` from the example:
-	```powershell
-	Copy-Item .env.example .env
-	notepad .env
-	```
-	Get the backend Firebase values:
-	- Open https://console.firebase.google.com and select your project.
-	- Click the gear icon, then **Project settings → Service accounts → Firebase Admin SDK**.
-	- Click **Generate new private key** and download the JSON file.
-	- Open the downloaded JSON on your computer. Copy its `project_id` into `FIREBASE_PROJECT_ID`, its `client_email` into `FIREBASE_CLIENT_EMAIL`, and its complete `private_key` value into `FIREBASE_PRIVATE_KEY` in `.env`.
-	- Keep the private key on one line inside quotes, preserving the `\n` characters. Do not paste the whole JSON into `.env`, and never commit or share the key.
+#### 4. Set two private secrets in `.env`
 
-	The web app config is separate: add it to `frontend/js/firebase-config.js`. Enable Google sign-in in **Authentication → Sign-in method**. The web app config and service-account JSON must belong to the same Firebase project.
-3. Create the local SQLite database:
-	```powershell
-	npm.cmd run migrate
-	```
-4. Start the backend in this terminal and leave it running:
-	```powershell
-	npm.cmd start
-	```
-5. Open a second PowerShell terminal in the project folder and start the website:
-	```powershell
-	npx.cmd serve frontend -l 3000
-	```
-6. Open http://localhost:3000 in your browser.
+Replace `replace-with-a-long-random-string` for both `JWT_SECRET` and `ENCRYPTION_KEY` in `.env`. They must be different values. You can make a random value by running this command in the terminal twice and copying a different result each time:
 
-If you shared a service-account key, revoke it in Google Cloud and generate a new one before continuing.
+```powershell
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+Paste one result after `JWT_SECRET=` and the other after `ENCRYPTION_KEY=`. Do not share these values. Keep the other `.env` settings as they are unless you know you need to change them.
+
+#### 5. Enable Google sign-in
+
+In the Firebase Console, open **Authentication → Sign-in method** and enable **Google**. The Firebase service-account key and the web app configuration must be from the same Firebase project.
+
+The web app configuration is in `frontend/js/firebase-config.js`. This repository already has the web configuration for project `digivault-2026`. If you are using that project, you do not need to edit this file. If you use a different Firebase project, go to **Project settings → General → Your apps**, select or create a **Web app**, choose **Config** in the SDK setup section, and replace the values in `firebase-config.js` with that web app's config. This web config is different from the private service-account JSON: never put the service-account private key in frontend files.
+
+#### 6. Start DigiVault
+
+Save and close `.env`, then run:
+
+```powershell
+npm.cmd start
+```
+
+Open **http://localhost:4000**. The start command creates or updates the local SQLite database automatically and serves both the website and API. You do not need a separate migration command, second terminal, or `npx serve`.
+
+On later visits to this computer, just run `npm.cmd start`. Keep `.env`—do not recreate it.
+
+Run the database tests with `npm.cmd test`.
 
 Digital Assets Management System. The codebase is split into four components:
 
@@ -54,54 +98,7 @@ Digital Assets Management System. The codebase is split into four components:
 - `database/` — SQLite schema, local database, and SQL queries
 - `security/` — Firebase token verification, JWT sessions, PIN hashing, field encryption, audit logging, watermarking
 
-## 1. Prerequisites
-
-- Node.js 22.13+
-- A Firebase project with the **Google** sign-in provider enabled (Authentication → Sign-in method)
-- A Firebase service account key (Project settings → Service accounts → Generate new private key)
-
-Application data is stored locally in SQLite; PostgreSQL is not required.
-
-## 2. Install dependencies
-
-```powershell
-npm.cmd install
-```
-
-## 3. Configure environment variables
-
-Copy `.env.example` to `.env` and fill in:
-
-- `SQLITE_DB_PATH` — local SQLite file path (defaults to `./database/digivault.sqlite`)
-- `JWT_SECRET` / `ENCRYPTION_KEY` — long random strings
-- `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY` — from the service account key JSON
-
-## 4. Create the local database
-
-```powershell
-npm.cmd run migrate
-```
-
-This creates the SQLite database file. Any existing PostgreSQL data is left untouched and is not copied into SQLite.
-
-Run the database query tests with `npm.cmd test`.
-
-## 5. Configure the frontend Firebase client
-
-Edit `frontend/js/firebase-config.js` and replace the placeholder values with your Firebase **web app** config (Project settings → General → Your apps → SDK setup and configuration).
-Enable Google under Authentication → Sign-in method. The web app config is separate from the service-account credentials used by the backend; both must belong to the same Firebase project. Do not put the service-account private key in frontend files.
-
-If the backend runs somewhere other than `http://localhost:4000`, set `window.DIGIVAULT_API_BASE_URL` before the page scripts load (e.g. a small inline `<script>` tag in each HTML file, or a shared `config.js`).
-
-When using `npx.cmd serve frontend`, set `CORS_ORIGIN=http://localhost:3000` in `.env`, or set it to the actual origin printed by your static server.
-
-## 6. Run
-
-```powershell
-npm.cmd start
-```
-
-Serve the `frontend/` folder with a static file server (for example `npx.cmd serve frontend -l 3000`) in a second terminal and open http://localhost:3000.
+Application data is stored locally in SQLite; PostgreSQL is not required. The optional `npm.cmd run migrate` command is still available for manual database setup.
 
 ## How login works
 
