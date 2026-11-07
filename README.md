@@ -26,7 +26,20 @@ Open the project folder in VS Code, choose **Terminal → New Terminal**, and ru
 npm.cmd install
 ```
 
-Wait for it to finish. This downloads the packages the project needs. You do not need to repeat this every time you start the project.
+Wait for it to finish. This downloads the packages the project needs. You do not need to repeat this every time you start the project. If not work then brute force:
+
+```powershell
+cd /d "c:\Users\User\Downloads\DigiVault-main\DigiVault-main"
+node -v
+npm -v
+winget install OpenJS.NodeJS.LTS
+rem close this terminal and reopen it after the Node install finishes
+cd /d "c:\Users\User\Downloads\DigiVault-main\DigiVault-main"
+rmdir /s /q node_modules
+del /f /q package-lock.json
+npm cache clean --force
+npm install --legacy-peer-deps
+```
 
 #### 2. Create your local `.env` file
 
