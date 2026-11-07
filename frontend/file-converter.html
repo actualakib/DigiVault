@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiVault — File Converter</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <div class="page-container">
+    <div class="page-header">
+      <h1>File Converter</h1>
+      <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+    </div>
+
+    <div class="folder-grid">
+      <div class="folder-tile" id="chooseExistingTile">
+        <div class="folder-icon">🗄️</div>
+        <div>Choose a file already in DigiVault</div>
+      </div>
+      <div class="folder-tile" id="uploadNewTile">
+        <div class="folder-icon">⬆️</div>
+        <div>Upload a new file</div>
+        <input type="file" id="uploadInput" class="hidden" accept="image/*">
+      </div>
+    </div>
+
+    <div id="existingPicker" class="hidden card">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Source Feature</label>
+          <select id="sourceFeature">
+            <option value="personal_vault">Personal Vault</option>
+            <option value="financial_vault">Financial Vault</option>
+            <option value="certificates">Certificates</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>File ID</label>
+          <input id="sourceFileId" placeholder="Enter the file ID shown on its vault page">
+        </div>
+      </div>
+      <div class="center-action">
+        <button class="primary-button" id="convertExistingButton" style="max-width:220px">Convert to PDF</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">Converted Files</h2>
+    <div class="file-list" id="jobList"></div>
+
+    <div class="status-text" id="statusText"></div>
+  </div>
+</main>
+<script type="module" src="js/file-converter.js"></script>
+</body>
+</html>

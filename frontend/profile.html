@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiVault — Profile</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <div class="page-container" style="max-width:520px">
+    <div class="page-header">
+      <h1>Account</h1>
+      <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+    </div>
+
+    <div class="profile-menu" id="menuView">
+      <div class="menu-item" data-section="dashboard"><span>Dashboard</span><span>→</span></div>
+      <div class="menu-item" data-section="profile"><span>Profile</span><span>→</span></div>
+      <div class="menu-item" data-section="security"><span>Security</span><span>→</span></div>
+      <div class="menu-item" data-section="delete"><span>Delete Account</span><span>→</span></div>
+      <div class="menu-item" data-section="logout"><span>Logout</span><span>→</span></div>
+    </div>
+
+    <div class="card hidden" id="profileSection">
+      <h2 style="margin-top:0">Profile</h2>
+      <div class="form-field"><label>Display Name</label><input id="displayNameInput"></div>
+      <div class="form-field"><label>Email</label><input id="emailInput" disabled></div>
+      <div class="center-action"><button class="primary-button" id="saveProfileButton" style="max-width:200px">Save</button></div>
+      <button class="secondary-button" data-back="menu">← Back</button>
+    </div>
+
+    <div class="card hidden" id="securitySection">
+      <h2 style="margin-top:0">Security</h2>
+      <div class="form-field"><label>Current PIN</label><input id="currentPinInput" type="password" maxlength="8"></div>
+      <div class="form-field"><label>New PIN</label><input id="newPinInput" type="password" maxlength="8"></div>
+      <div class="center-action"><button class="primary-button" id="changePinButton" style="max-width:200px">Update PIN</button></div>
+      <h3>Recent Activity</h3>
+      <div id="auditList"></div>
+      <button class="secondary-button" data-back="menu">← Back</button>
+    </div>
+
+    <div class="card hidden" id="deleteSection">
+      <h2 style="margin-top:0">Delete Account</h2>
+      <p>This permanently removes your DigiVault account and all stored data.</p>
+      <button class="primary-button danger-button" id="confirmDeleteButton">Permanently Delete My Account</button>
+      <button class="secondary-button" data-back="menu">← Back</button>
+    </div>
+
+    <div class="status-text" id="statusText"></div>
+  </div>
+</main>
+<script type="module" src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiVault — Financial Vault</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <div class="page-container">
+    <div class="page-header">
+      <h1>Financial Vault</h1>
+      <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+    </div>
+
+    <div id="folderView">
+      <div class="folder-grid" id="folderGrid"></div>
+      <div class="center-action">
+        <button class="secondary-button" id="addFolderButton" style="max-width:220px">+ Add Folder</button>
+      </div>
+    </div>
+
+    <div id="filesView" class="hidden">
+      <div class="page-header">
+        <h2 id="activeFolderName"></h2>
+        <a class="back-link" href="#" id="backToFolders">← Back to Folders</a>
+      </div>
+      <div class="center-action">
+        <button class="upload-button" id="addDocumentsButton">+ Add Documents</button>
+        <input type="file" id="fileInput" class="hidden">
+      </div>
+      <div class="file-list" id="fileList"></div>
+    </div>
+
+    <div class="status-text" id="statusText"></div>
+  </div>
+</main>
+<script type="module" src="js/financial-vault.js"></script>
+</body>
+</html>

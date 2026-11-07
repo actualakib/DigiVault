@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiVault — Personal Vault</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <div class="page-container">
+    <div class="page-header">
+      <h1>Personal Vault</h1>
+      <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+    </div>
+
+    <div class="center-action">
+      <button class="upload-button" id="addFileButton">+ Add File</button>
+      <input type="file" id="fileInput" class="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*,video/*">
+    </div>
+
+    <h2 class="section-title">Photos</h2>
+    <div class="file-list" id="photosList"></div>
+
+    <h2 class="section-title">Videos</h2>
+    <div class="file-list" id="videosList"></div>
+
+    <h2 class="section-title">Documents</h2>
+    <div class="file-list" id="documentsList"></div>
+
+    <div class="status-text" id="statusText"></div>
+  </div>
+</main>
+<script type="module" src="js/personal-vault.js"></script>
+</body>
+</html>

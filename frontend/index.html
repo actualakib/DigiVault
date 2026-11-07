@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiVault — Sign In</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <div class="card auth-card">
+    <h1>DigiVault</h1>
+    <p id="authSubtitle">Your digital assets, secured in one place.</p>
+
+    <div id="googleStep">
+      <button class="google-button" id="googleButton">
+        <span>Continue with Google</span>
+      </button>
+    </div>
+
+    <div class="pin-section" id="createPinStep">
+      <p>Create a security PIN to protect your vault.</p>
+      <input class="pin-input" id="createPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="••••">
+      <input class="pin-input" id="confirmPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Confirm PIN">
+      <button class="primary-button" id="createPinButton">Set Security PIN</button>
+    </div>
+
+    <div class="pin-section" id="enterPinStep">
+      <p>Enter your security PIN to continue.</p>
+      <input class="pin-input" id="enterPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="••••">
+      <button class="primary-button" id="enterPinButton">Unlock DigiVault</button>
+    </div>
+
+    <div class="status-text" id="statusText"></div>
+  </div>
+</main>
+<script type="module" src="js/auth.js"></script>
+</body>
+</html>
