@@ -1,0 +1,6 @@
+CORS_ORIGIN=http://localhost:3000
+DATABASE_URL=postgresql://postgres:yourpassword123@localhost:5432/digivault
+DATABASE_SSL=false
+FIREBASE_PROJECT_ID=digivault-2026
+FIREBASE_CLIENT_EMAIL=the-client_email-from-your-new-JSON
+FIREBASE_PRIVATE_KEY="the-private_key-from-your-new-JSON"
