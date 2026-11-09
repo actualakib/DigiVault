@@ -83,3 +83,4 @@ document.getElementById('enterPinButton').addEventListener('click', async () => 
     showStatus(err.message || 'Incorrect PIN');
   }
 });
+// module 1, feature 1 by @Adnan Akib
