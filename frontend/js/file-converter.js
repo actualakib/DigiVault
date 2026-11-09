@@ -87,3 +87,4 @@ document.body.addEventListener('click', async (event) => {
 });
 
 loadJobs();
+// added by @nihadrahman69 for module 1, feature
