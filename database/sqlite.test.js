@@ -38,6 +38,8 @@ test('SQLite supports DigiVault database operations', async () => {
     storagePath: 'demo.txt',
     ocrText: 'Searchable text'
   });
+  const savedFiles = await personalVault.listFiles(user.id);
+  assert.equal(savedFiles[0].ocr_text, 'Searchable text');
   assert.equal((await personalVault.searchFiles(user.id, 'SEARCHABLE')).length, 1);
 
   const record = await quickRecords.upsertSelfRecord(user.id, { fullName: 'Demo User' });

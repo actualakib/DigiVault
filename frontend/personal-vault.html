@@ -19,14 +19,25 @@
       <input type="file" id="fileInput" class="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*,video/*">
     </div>
 
-    <h2 class="section-title">Photos</h2>
-    <div class="file-list" id="photosList"></div>
+    <div class="vault-layout">
+      <div class="vault-content">
+        <h2 class="section-title">Photos</h2>
+        <div class="file-list" id="photosList"></div>
 
-    <h2 class="section-title">Videos</h2>
-    <div class="file-list" id="videosList"></div>
+        <h2 class="section-title">Videos</h2>
+        <div class="file-list" id="videosList"></div>
 
-    <h2 class="section-title">Documents</h2>
-    <div class="file-list" id="documentsList"></div>
+        <h2 class="section-title">Documents</h2>
+        <div class="file-list" id="documentsList"></div>
+      </div>
+
+      <aside class="ocr-panel hidden" id="ocrPanel" aria-live="polite">
+        <div class="ocr-panel-header">
+          <h3 id="ocrPanelTitle">Extracted Text</h3>
+        </div>
+        <textarea id="ocrTextOutput" readonly placeholder="No text detected in this image."></textarea>
+      </aside>
+    </div>
 
     <div class="status-text" id="statusText"></div>
   </div>

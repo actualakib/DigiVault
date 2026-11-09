@@ -332,6 +332,50 @@ footer {
   font-size: 13px;
 }
 
+.vault-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(260px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.vault-content {
+  min-width: 0;
+}
+
+.ocr-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 20px;
+  min-height: 300px;
+  position: sticky;
+  top: 24px;
+}
+
+.ocr-panel-header {
+  margin-bottom: 12px;
+}
+
+.ocr-panel-header h3 {
+  margin: 0;
+  color: var(--color-primary-dark);
+}
+
+#ocrTextOutput {
+  width: 100%;
+  min-height: 260px;
+  resize: vertical;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #f9fbfa;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -426,6 +470,9 @@ footer {
 }
 
 @media (max-width: 640px) {
+  .vault-layout {
+    grid-template-columns: 1fr;
+  }
   .dashboard-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);

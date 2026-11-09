@@ -2,7 +2,7 @@ const { query } = require('../db');
 
 async function listFiles(userId) {
   const result = await query(
-    `SELECT id, category, original_name, mime_type, size_bytes, created_at
+    `SELECT id, category, original_name, mime_type, size_bytes, ocr_text, created_at
      FROM personal_vault_files WHERE user_id = $1 ORDER BY created_at DESC`,
     [userId]
   );
@@ -37,7 +37,7 @@ async function deleteFile(userId, fileId) {
 
 async function searchFiles(userId, term) {
   const result = await query(
-    `SELECT id, category, original_name, mime_type, size_bytes, created_at
+    `SELECT id, category, original_name, mime_type, size_bytes, ocr_text, created_at
      FROM personal_vault_files
     WHERE user_id = $1 AND (LOWER(original_name) LIKE LOWER($2) OR LOWER(ocr_text) LIKE LOWER($2))
      ORDER BY created_at DESC`,
