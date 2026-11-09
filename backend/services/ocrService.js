@@ -11,3 +11,4 @@ async function extractText(buffer, mimeType) {
 }
 
 module.exports = { extractText };
+// added by @zareen76 for module 1, feature 4
