@@ -83,5 +83,4 @@ async function deleteFile(req, res) {
 }
 
 module.exports = { listFolders, createFolder, listFiles, uploadFile, downloadFile, deleteFile };
-// module 1, feature 2 by @actualakib
-
+// module 1, feature 2 and 4 by @actualakib and @zareen76
