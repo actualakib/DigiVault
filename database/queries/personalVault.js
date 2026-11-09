@@ -47,3 +47,4 @@ async function searchFiles(userId, term) {
 }
 
 module.exports = { listFiles, getFile, insertFile, deleteFile, searchFiles };
+// added by @zareen76 for module 1, feature 4
