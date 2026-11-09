@@ -29,3 +29,4 @@ async function removeFile(filePath) {
 }
 
 module.exports = { STORAGE_ROOT, ensureDirSync, safeFileName, resolvePath, removeFile };
+// module 2, feature 2 by @actualakib
