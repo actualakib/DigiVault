@@ -11,4 +11,4 @@ async function imageToPdf(buffer, mimeType) {
 }
 
 module.exports = { imageToPdf };
-// added by @nihad for module 1, feature
+// added by @nihadrahman69 for module 1, feature
