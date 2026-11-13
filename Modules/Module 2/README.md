@@ -1,6 +1,6 @@
 # Module 2: Advanced Security & Privacy
 
-## 5. Session Timeout
+## 5. Session Timeout [Zareen Sultana 232-35-483]
 **Assigned feature:** Authenticated areas
 
 Authenticated pages sign the user out 15 minutes after the session starts, regardless of activity. The dashboard countdown is shared across pages and tabs and is not reset by clicks or navigation. This client-side timeout complements, but does not replace, JWT expiration.
