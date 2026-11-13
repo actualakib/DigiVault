@@ -17,6 +17,7 @@
     <div class="profile-menu" id="menuView">
       <div class="menu-item" data-section="dashboard"><span>Dashboard</span><span>→</span></div>
       <div class="menu-item" data-section="profile"><span>Profile</span><span>→</span></div>
+      <div class="menu-item" data-section="backup"><span>Local Backup</span><span>→</span></div>
       <div class="menu-item" data-section="security"><span>Security</span><span>→</span></div>
       <div class="menu-item" data-section="delete"><span>Delete Account</span><span>→</span></div>
       <div class="menu-item" data-section="logout"><span>Logout</span><span>→</span></div>
@@ -30,13 +31,22 @@
       <button class="secondary-button" data-back="menu">← Back</button>
     </div>
 
+    <div class="card hidden" id="backupSection">
+      <h2 style="margin-top:0">Local Backup</h2>
+      <p class="backup-warning">The ZIP contains uploaded vault files and file metadata only. Passwords, bank details, quick records, OCR text, and converted files are excluded. Uploaded files may still contain sensitive information.</p>
+      <button class="primary-button" id="exportBackupButton" type="button">Download Local Backup (.zip)</button>
+      <button class="secondary-button" data-back="menu">← Back</button>
+    </div>
+
     <div class="card hidden" id="securitySection">
       <h2 style="margin-top:0">Security</h2>
       <div class="form-field"><label>Current PIN</label><input id="currentPinInput" type="password" maxlength="8"></div>
       <div class="form-field"><label>New PIN</label><input id="newPinInput" type="password" maxlength="8"></div>
       <div class="center-action"><button class="primary-button" id="changePinButton" style="max-width:200px">Update PIN</button></div>
       <h3>Recent Activity</h3>
-      <div id="auditList"></div>
+      <div id="auditList" class="activity-list"></div>
+      <h3>Anti-Tampering activity</h3>
+      <div id="fileActivityList" class="activity-list"></div>
       <button class="secondary-button" data-back="menu">← Back</button>
     </div>
 

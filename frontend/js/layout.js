@@ -13,7 +13,11 @@ function renderTopbar(activeInitial) {
 
 function renderFooter() {
   const footer = document.createElement('footer');
-  footer.innerHTML = `<a class="about-link" href="about.html">About Us</a>`;
+  footer.className = 'footer-links';
+  footer.innerHTML = `
+    <a class="about-link" href="about.html">About Us</a>
+    <a class="about-link" href="about.html#faqHeading">FAQ</a>
+  `;
   document.body.appendChild(footer);
 }
 

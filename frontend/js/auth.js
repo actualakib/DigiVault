@@ -8,6 +8,10 @@ const enterPinStep = document.getElementById('enterPinStep');
 const statusText = document.getElementById('statusText');
 const authSubtitle = document.getElementById('authSubtitle');
 
+if (new URLSearchParams(window.location.search).get('reason') === 'session-timeout') {
+  document.getElementById('statusText').textContent = 'Your 15-minute session has ended.';
+}
+
 function showStatus(message) {
   statusText.textContent = message || '';
 }

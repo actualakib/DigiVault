@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs/promises');
 const personalVault = require('../../database/queries/personalVault');
+const customCategories = require('../../database/queries/customCategories');
 const { categoryForMime } = require('../services/imageService');
 const { extractText } = require('../services/ocrService');
 const { ensureDirSync, safeFileName, resolvePath, removeFile } = require('../services/storage');
@@ -75,6 +76,7 @@ async function deleteFile(req, res) {
   if (!deleted) {
     return res.status(404).json({ error: 'File not found' });
   }
+  await customCategories.deleteFileCategories(req.user.userId, 'personal_vault', req.params.fileId);
   await removeFile(deleted.storage_path);
   await logAction(req, { action: 'file_delete', feature: 'personal_vault', metadata: { fileId: req.params.fileId } });
   return res.status(204).send();

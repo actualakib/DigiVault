@@ -12,6 +12,7 @@ const quickRecordsRoutes = require('./routes/quickRecords');
 const passwordManagerRoutes = require('./routes/passwordManager');
 const certificatesRoutes = require('./routes/certificates');
 const fileConverterRoutes = require('./routes/fileConverter');
+const customCategoriesRoutes = require('./routes/customCategories');
 const profileRoutes = require('./routes/profile');
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/api/quick-records', quickRecordsRoutes);
 app.use('/api/password-manager', passwordManagerRoutes);
 app.use('/api/certificates', certificatesRoutes);
 app.use('/api/file-converter', fileConverterRoutes);
+app.use('/api/custom-categories', customCategoriesRoutes);
 app.use('/api/profile', profileRoutes);
 app.use(express.static(path.join(__dirname, '../frontend')));
 

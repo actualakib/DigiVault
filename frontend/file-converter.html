@@ -24,6 +24,10 @@
         <div>Upload a new file</div>
         <input type="file" id="uploadInput" class="hidden" accept="image/*">
       </div>
+      <button class="folder-tile category-choice-button" id="browseCategoriesTile" type="button">
+        <div class="folder-icon">🏷️</div>
+        <div>Browse by Categories</div>
+      </button>
     </div>
 
     <div id="existingPicker" class="hidden card">
@@ -45,6 +49,16 @@
         <button class="primary-button" id="convertExistingButton" style="max-width:220px">Convert to PDF</button>
       </div>
     </div>
+
+    <section class="category-browser hidden" id="categoryBrowser" aria-labelledby="categoryBrowserTitle">
+      <h2 class="section-title" id="categoryBrowserTitle">Browse by Categories</h2>
+      <div class="category-list" id="categoryList" role="group" aria-label="Categories"></div>
+      <div class="status-text" id="categoryStatusText" role="status"></div>
+      <div class="file-list" id="categoryFileList"></div>
+      <div class="center-action">
+        <button class="primary-button" id="convertCategorizedFileButton" type="button" style="max-width:280px" disabled>Convert Selected File to PDF</button>
+      </div>
+    </section>
 
     <h2 class="section-title">Converted Files</h2>
     <div class="file-list" id="jobList"></div>

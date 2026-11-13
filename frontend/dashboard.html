@@ -8,7 +8,12 @@
 </head>
 <body>
 <main>
-  <div class="dashboard-grid">
+  <div class="dashboard-content">
+    <div class="session-timeout" aria-live="polite">
+      <span>Session timeout</span>
+      <strong id="sessionTimeoutTimer">15:00</strong>
+    </div>
+    <div class="dashboard-grid">
     <button class="dashboard-tile tile-1" data-href="personal-vault.html">
       <span class="tile-icon">🗂️</span>
       <span>Personal Vault</span>
@@ -33,6 +38,7 @@
       <span class="tile-icon">🔄</span>
       <span>File Converter</span>
     </button>
+    </div>
   </div>
 </main>
 <script type="module" src="js/dashboard.js"></script>

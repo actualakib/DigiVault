@@ -3,6 +3,7 @@ const auditLogs = require('../../database/queries/auditLogs');
 const { admin } = require('../../security/firebaseAdmin');
 const { isValidPin, hashPin, verifyPin } = require('../../security/pin');
 const { logAction } = require('../../security/audit');
+const { createBackupArchive } = require('../services/backupService');
 
 async function getProfile(req, res) {
   const user = await users.findById(req.user.userId);
@@ -45,6 +46,27 @@ async function getAuditLogs(req, res) {
   return res.json(logs);
 }
 
+async function getFileActivityLogs(req, res) {
+  const logs = await auditLogs.listFileActivity(req.user.userId);
+  return res.json(logs);
+}
+
+async function exportBackup(req, res, next) {
+  try {
+    const archive = await createBackupArchive(req.user.userId);
+    await logAction(req, { action: 'backup_export', feature: 'profile' });
+    archive.on('error', (err) => {
+      if (res.headersSent) res.destroy(err);
+      else next(err);
+    });
+    res.attachment(`DigiVault-Backup-${new Date().toISOString().slice(0, 10)}.zip`);
+    archive.pipe(res);
+    archive.finalize();
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function deleteAccount(req, res) {
   await logAction(req, { action: 'account_delete', feature: 'security' });
   try {
@@ -56,4 +78,4 @@ async function deleteAccount(req, res) {
   return res.status(204).send();
 }
 
-module.exports = { getProfile, updateProfile, changePin, getAuditLogs, deleteAccount };
+module.exports = { getProfile, updateProfile, changePin, getAuditLogs, getFileActivityLogs, exportBackup, deleteAccount };

@@ -100,6 +100,16 @@ CREATE TABLE IF NOT EXISTS certificates_files (
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS custom_file_categories (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  feature TEXT NOT NULL CHECK (feature IN ('personal_vault', 'financial_vault', 'certificates')),
+  file_id INTEGER NOT NULL CHECK (file_id > 0),
+  category TEXT NOT NULL CHECK (length(category) BETWEEN 1 AND 60),
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE (user_id, feature, file_id, category)
+);
+
 CREATE TABLE IF NOT EXISTS file_conversion_jobs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -126,4 +136,5 @@ CREATE INDEX IF NOT EXISTS idx_financial_vault_files_user ON financial_vault_fil
 CREATE INDEX IF NOT EXISTS idx_quick_records_user ON quick_records(user_id);
 CREATE INDEX IF NOT EXISTS idx_password_entries_user ON password_entries(user_id);
 CREATE INDEX IF NOT EXISTS idx_certificates_files_user ON certificates_files(user_id);
+CREATE INDEX IF NOT EXISTS idx_custom_file_categories_user ON custom_file_categories(user_id, category);
 CREATE INDEX IF NOT EXISTS idx_audit_logs_user ON audit_logs(user_id);
