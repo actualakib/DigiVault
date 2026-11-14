@@ -9,6 +9,8 @@ You need [Node.js 22.13 or newer](https://nodejs.org/) and an internet connectio
 Open the DigiVault project folder in VS Code, open **Terminal → New Terminal**, and run:
 
 ```powershell
+# Set-Location .\file directory
+Set-Location .\DigiVault 
 npm.cmd start
 ```
 
