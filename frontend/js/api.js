@@ -1,4 +1,4 @@
-const API_BASE_URL = window.DIGIVAULT_API_BASE_URL || 'http://localhost:4000/api';
+const API_BASE_URL = window.DIGIVAULT_API_BASE_URL || 'https://digivault-82oe.onrender.com/api';
 const SESSION_TIMEOUT_MS = 15 * 60 * 1000;
 const SESSION_STARTED_KEY = 'digivault_session_started_at';
 let sessionTimeoutStarted = false;
